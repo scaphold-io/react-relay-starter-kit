@@ -1,5 +1,4 @@
 import Relay from 'react-relay';
-import Login from '../components/Login'
 
 export default class RegisterMutation extends Relay.Mutation {
   static initialVariables = {
@@ -11,9 +10,7 @@ export default class RegisterMutation extends Relay.Mutation {
   getMutation() {
     return Relay.QL`
       mutation {
-        user {
-          create
-        }
+        createUser
       }
     `;
   }
@@ -21,15 +18,13 @@ export default class RegisterMutation extends Relay.Mutation {
   // input to the mutation. Our ‘likeStory’ mutation takes exactly
   // one variable as input – the ID of the story to like.
   getVariables() {
-    console.log("GET VARS");
-    console.log(this.props);
+    // console.log("GET VARS");
+    // console.log(this.props);
     return {
-      input: {
-        credentials: {
-          basic: {
-            email: this.props.input.credentials.basic.email,
-            password: this.props.input.credentials.basic.password
-          }
+      credentials: {
+        basic: {
+          email: this.props.credentials.basic.email,
+          password: this.props.credentials.basic.password
         }
       }
     };
@@ -42,18 +37,12 @@ export default class RegisterMutation extends Relay.Mutation {
   // that represents the data that your application actually uses, and
   // instruct the server to include only those fields in its response.
   getFatQuery() {
+    // console.log("getFatQuery");
+    // console.log(this.props);
     return Relay.QL`
-      fragment on _UserPayload {
-        id,
+      fragment on _CreateUserPayload {
         changedUser {
           credentials {
-            facebook {
-              id,
-              displayName,
-              email,
-              accessToken,
-              picture
-            },
             basic {
               email,
               password
@@ -61,24 +50,6 @@ export default class RegisterMutation extends Relay.Mutation {
           },
           createdAt,
           modifiedAt
-        },
-        changedUserEdge {
-          node {
-            credentials {
-              facebook {
-                id,
-                displayName,
-                email,
-                accessToken,
-                picture
-              },
-              basic {
-                email,
-                password
-              }
-            }
-          },
-          cursor
         }
       }
     `
@@ -89,22 +60,61 @@ export default class RegisterMutation extends Relay.Mutation {
   // key-value pairs of ‘fieldIDs’ associate field names in the payload
   // with the ID of the record that we want updated.
   getConfigs() {
+    // console.log("getConfigs");
+    // console.log(this.props);
+    // return [{
+    //   type: 'FIELDS_CHANGE',
+    //   fieldIDs: {
+    //     changedUser: this.props.id
+    //   }
+    // }];
     return [{
-      type: 'FIELDS_CHANGE',
-      fieldIDs: {
-        user: this.props.user
-      },
-    }];
+      type: 'REQUIRED_CHILDREN',
+      children: [Relay.QL `
+        fragment on _CreateUserPayload {
+          changedUser {
+            credentials {
+              basic {
+                email,
+                password
+              }
+            },
+            createdAt,
+            modifiedAt
+          }
+        }
+      `]
+    }]
   }
+
+  getOptimisticResponse() {
+    // console.log("getOptimisticResponse");
+    // console.log(this.props);
+    return {
+      changedUser: {
+        credentials: this.props.credentials
+      }
+    }
+  }
+
   // This mutation has a hard dependency on the story's ID. We specify this
   // dependency declaratively here as a GraphQL query fragment. Relay will
   // use this fragment to ensure that the story's ID is available wherever
   // this mutation is used.
   static fragments = {
-    // user: () => Relay.QL`
-    //   fragment on _UserPayload {
-    //     id
-    //   }
-    // `,
+    user: () => Relay.QL`
+      fragment on _CreateUserPayload {
+        changedUser {
+          credentials {
+            basic {
+              email,
+              password
+            }
+          },
+          createdAt,
+          modifiedAt
+        }
+      }
+    `,
   };
 }

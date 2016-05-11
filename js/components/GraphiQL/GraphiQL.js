@@ -2,7 +2,9 @@ import React from 'react';
 import Relay from 'react-relay';
 import GraphiQL from 'graphiql';
 import fetch from 'isomorphic-fetch';
-import config from '../../config';
+import config from './../../../config';
+import Header from './../App/Header';
+import LoggedInHeader from './../HackerNewsClone/Header';
 
 function graphQLFetcher(graphQLParams) {
   return fetch(config.scapholdUrl, {
@@ -19,8 +21,20 @@ class GraphiQLModule extends React.Component {
   render() {
   	console.log("GraphiQLModule.props");
     console.log(this.props);
+
+    var header;
+    if (!localStorage.userToken) {
+      header = <Header />;
+    }
+    else {
+      header = <LoggedInHeader />;
+    }
+
     return (
-      <GraphiQL fetcher={graphQLFetcher} />
+      <span>
+        {header}
+        <GraphiQL fetcher={graphQLFetcher} />
+      </span>
     )
   }
 }

@@ -1,4 +1,5 @@
 import Relay from 'react-relay';
+import config from './../../config';
 // export default class extends Relay.Route {
 // 	static paramDefinitions = {
 // 		input: { required: true }
@@ -18,20 +19,20 @@ import Relay from 'react-relay';
 // }
 
 export const HomeQueries = {
-	user: (Component, variables) => {
-		return Relay.QL`
-      		query {
-      			user {
-      				${Component.getFragment('user', {input: variables.input})}
-      			}
-			}
-		`
-	},
-	hnItems: (Component, variables) => {
+	// user: (Component, variables) => {
+	// 	return Relay.QL`
+ //      		query {
+ //      			user {
+ //      				${Component.getFragment('user', {input: variables.input})}
+ //      			}
+	// 		}
+	// 	`
+	// },
+	allHackerNewsItems: (Component, variables) => {
 		return Relay.QL `
 			query {
-				hackerNewsItem {
-					${Component.getFragment('hnItems', {hnInput: variables.hnInput})}
+				viewer {
+					${Component.getFragment('allHackerNewsItems', {orderBy: variables.orderBy})}
 				}
 			}
 		`
@@ -39,9 +40,23 @@ export const HomeQueries = {
 }
 
 export function prepareHomeParams(params, {}) {
+	console.log("HomeRoute.prepareHomeParams");
+	console.log(params);
 	return {
 	    ...params,
-		input: "c582004b-c39f-4a28-bb2c-f6ce2df0f30d",
-		hnInput: "8b9cd408-a1a7-4bd0-9640-27493abd94cf"
+		input: "NDFmOGZkOWMtNjkzMi00ZjkyLTkyNDItMDA4NmFjNDcwNjg5OmQxMmUxNTE4LWJlYjgtNDExYi1iNzRkLTM0YWE5NTg3OTEzNg==",
+		orderBy: "-createdAt"
 	};
 }
+
+
+// input: this.props.userId,
+// hnInput: "MDEzNmJlMjYtZDc3OS00MTRlLTg1NDAtZDcyNTJiYWViNWIyOmZmZDMzZGI0LWMzN2ItNGJmZC04YzE0LTYwZWM5YzZmNWQ0Nw=="
+
+// return Relay.QL `
+// 			query {
+// 				hackerNewsItem {
+// 					${Component.getFragment('hnItems', {hnInput: variables.hnInput})}
+// 				}
+// 			}
+// 		`
