@@ -3,6 +3,7 @@ import Relay from 'react-relay';
 import { hashHistory } from 'react-router';
 import { Button, Modal, OverlayTrigger, NavItem, Form, FormControl, FormGroup, Row, Col, ControlLabel} from 'react-bootstrap';
 import * as Auth from './../../auth/Auth';
+import config from './../../../config';
 
 class Register extends React.Component {
 
@@ -36,11 +37,11 @@ class Register extends React.Component {
         config.userToken = result.loginUser.token;
         localStorage.userId = result.loginUser.id;
         localStorage.userToken = config.userToken;
-        localStorage.email = this.state.loginEmail;
+        localStorage.email = this.state.registerEmail;
         hashHistory.push(`/home`);
       }).catch((error) => {
-        var e  = error.split('[ERROR]')[1];
-        this.setState({errors: "Error: " + e});
+        // var e  = error.split('[ERROR]')[1];
+        this.setState({errors: "Error: " + error});
       });
   }
 
