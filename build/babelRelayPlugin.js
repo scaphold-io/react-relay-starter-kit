@@ -7,7 +7,7 @@ var config = require("../config");
 var graphqlHubUrl = 'https://www.graphqlhub.com/graphql';
 var response = request('GET', config.scapholdUrl, {
 	headers: {
-      Authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3NjYXBob2xkLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw1NzMxMzYwNTgzMTQwM2QyMGRmMjJkZWMiLCJhdWQiOiJKdGdmeVpJUTJwSmo5ckk4RTllNjE3aFFjazBSbnhBbiIsImV4cCI6MTQ2MzMzODgyOSwiaWF0IjoxNDYzMjUyNDI5fQ.Vp-v4B81OHXyS887nwMgXhr8jiHF1bBMm52_DgpPjIg'
+      Authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3NjYXBob2xkLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw1NzMxMzYwNTgzMTQwM2QyMGRmMjJkZWMiLCJhdWQiOiJKdGdmeVpJUTJwSmo5ckk4RTllNjE3aFFjazBSbnhBbiIsImV4cCI6MTQ2MzYyMjE4NywiaWF0IjoxNDYzNTM1Nzg3fQ.NmiQMm3DxMsti8VKEak77F4-bwgSR3b7yZ925PhGHJM'
 	},
   	qs: {
     	query: introspectionQuery

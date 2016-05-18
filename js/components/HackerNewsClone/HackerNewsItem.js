@@ -1,7 +1,7 @@
 import React from 'react';
 import Relay from 'react-relay';
 
-class HackerNewsItems extends React.Component {
+class HackerNewsItem extends React.Component {
   render() {
     console.log("HackerNewsItem.props");
     console.log(this.props);
@@ -21,7 +21,7 @@ class HackerNewsItems extends React.Component {
   }
 }
 
-export default Relay.createContainer(HackerNewsItems, {
+export default Relay.createContainer(HackerNewsItem, {
   fragments: {
   },
 });
