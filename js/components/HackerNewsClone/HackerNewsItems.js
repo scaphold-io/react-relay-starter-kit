@@ -10,8 +10,8 @@ class HackerNewsItems extends React.Component {
 
     let items = this.props.allHackerNewsItems.edges.map(
       (hnItem, idx) => 
-        <div>
-          <HackerNewsItem hnItem={hnItem} num={idx} key={idx} />
+        <div key={idx}>
+          <HackerNewsItem hnItem={hnItem} num={idx} />
         </div>
     );
     
