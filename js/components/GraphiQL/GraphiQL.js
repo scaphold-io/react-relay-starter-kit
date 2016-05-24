@@ -19,11 +19,8 @@ function graphQLFetcher(graphQLParams) {
 
 class GraphiQLModule extends React.Component {
   render() {
-  	console.log("GraphiQLModule.props");
-    console.log(this.props);
-
     var header;
-    if (!localStorage.userToken) {
+    if (!localStorage.scapholdAuthToken) {
       header = <Header />;
     }
     else {

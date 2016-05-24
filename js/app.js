@@ -12,14 +12,11 @@ import Home from './components/HackerNewsClone/Home';
 import GraphiQLModule from './components/GraphiQL/GraphiQL';
 import { HomeQueries, prepareHomeParams } from './routes/HomeRoute';
 
-// Pull from storage somehow. However react/relay does this.
-// console.log("config");
-// console.log(config);
 Relay.injectNetworkLayer(
   new Relay.DefaultNetworkLayer(config.scapholdUrl, {
     headers: {
-      Authorization: 'Bearer ' + config.userToken
-    },
+      Authorization: 'Bearer ' + localStorage.scapholdAuthToken
+    }
   })
 );
 

@@ -7,10 +7,7 @@ import HackerNewsItems from './HackerNewsItems';
 
 class Home extends React.Component {
   render() {
-    console.log("Home.props");
-    console.log(this.props);
-
-    if (!localStorage.userToken) {
+    if (!localStorage.scapholdAuthToken) {
       hashHistory.push('/');
     }
 

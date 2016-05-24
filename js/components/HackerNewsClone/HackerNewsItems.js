@@ -5,9 +5,6 @@ import {Row, Col} from 'react-bootstrap';
 
 class HackerNewsItems extends React.Component {
   render() {
-    console.log("HackerNewsItems.props");
-    console.log(this.props);
-
     let items = this.props.allHackerNewsItems.edges.map(
       (hnItem, idx) => 
         <div key={idx}>

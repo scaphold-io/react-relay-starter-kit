@@ -40,10 +40,8 @@ class Login extends React.Component {
   loginUser() {
     Auth.login(this.state.loginEmail, this.state.loginPassword)
       .then((result) => {
-        close();
-        config.userToken = result.loginUser.token;
+        localStorage.scapholdAuthToken = result.loginUser.token;
         localStorage.userId = result.loginUser.id;
-        localStorage.userToken = config.userToken;
         localStorage.email = this.state.loginEmail;
         hashHistory.push(`/home`);
       }).catch((error) => {

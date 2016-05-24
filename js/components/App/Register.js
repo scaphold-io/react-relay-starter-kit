@@ -34,13 +34,11 @@ class Register extends React.Component {
     Auth.register(this.state.registerEmail, this.state.registerPassword)
       .then((result) => {
         close();
-        config.userToken = result.loginUser.token;
+        localStorage.scapholdAuthToken = result.loginUser.token;
         localStorage.userId = result.loginUser.id;
-        localStorage.userToken = config.userToken;
         localStorage.email = this.state.registerEmail;
         hashHistory.push(`/home`);
       }).catch((error) => {
-        // var e  = error.split('[ERROR]')[1];
         this.setState({errors: "Error: " + error});
       });
   }

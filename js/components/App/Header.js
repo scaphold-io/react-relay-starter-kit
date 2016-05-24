@@ -21,14 +21,11 @@ class Header extends React.Component {
   }
 
   render() {
-    console.log("Header.props");
-    console.log(this.props);
-
     return (
       <Navbar style={styles.navbar}>
         <Navbar.Header>
           <Navbar.Brand>
-            <a href="/">Scaphold.io</a>
+            <a href="/">Scaphold</a>
           </Navbar.Brand>
         </Navbar.Header>
         <Nav pullRight={true}>

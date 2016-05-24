@@ -20,9 +20,6 @@ class Header extends React.Component {
   }
 
   render() {
-    // console.log("Header.props");
-    // console.log(this.props);
-
     var loggedInUser = localStorage.email;
 
     return (

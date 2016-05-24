@@ -13,10 +13,7 @@ class App extends React.Component {
   }
 
   render() {
-    console.log("App.props");
-    console.log(this.props);
-
-    if (localStorage.userToken) {
+    if (localStorage.scapholdAuthToken) {
       hashHistory.push('/home');
     }
 
