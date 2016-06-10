@@ -8,7 +8,7 @@ import useRelay from 'react-router-relay';
 import config from './../config';
 
 import App from './components/App/App';
-import Home from './components/HackerNewsClone/Home';
+import Home from './components/Home/Home';
 import GraphiQLModule from './components/GraphiQL/GraphiQL';
 import { HomeQueries, prepareHomeParams } from './routes/HomeRoute';
 
@@ -28,9 +28,10 @@ ReactDOM.render(
     environment={Relay.Store}
   >
     <Route path="/" component={App} />
-    <Route path="/home" component={Home}
-      queries={HomeQueries} prepareParams={prepareHomeParams} />
+    <Route path="/home" component={Home} />
     <Route path="/graphiql" component={GraphiQLModule} />
   </Router>,
   document.getElementById('root')
 );
+
+/* Add queries={HomeQueries} prepareParams={prepareHomeParams} as attributes to the 'home' route to make queries defined in /routes/HomeRoute.js */

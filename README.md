@@ -1,6 +1,6 @@
-# Scaphold.io's React-Relay boilerplate
+#Scaphold.io's React-Relay boilerplate
 
-Fork this boilerplate code to get started with a HackerNews clone built with React-Relay.
+Fork this boilerplate code to get started with React-Relay.
 
 Quickstart:
 

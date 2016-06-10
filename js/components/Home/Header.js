@@ -26,7 +26,7 @@ class Header extends React.Component {
       <Navbar style={styles.navbar}>
         <Navbar.Header>
           <Navbar.Brand>
-            <a href="/">Hacker News Clone</a>
+            <a href="/">Scaphold</a>
           </Navbar.Brand>
         </Navbar.Header>
         <Nav pullRight={true}>

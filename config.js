@@ -1,5 +1,5 @@
 var config = {
-	scapholdUrl: "https://api.scaphold.io/data/0469e692-e55f-4be4-b72b-9a83e6680cfa",
+	scapholdUrl: "https://api.scaphold.io/graphql/9ef14f35-c459-41e9-a9d3-3933a7149822",
 }
 
 module.exports = config;
