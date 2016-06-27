@@ -14,13 +14,10 @@ export default class RegisterMutation extends Relay.Mutation {
   }
 
   getVariables() {
+    console.log(this.props);
     return {
-      credentials: {
-        basic: {
-          email: this.props.credentials.basic.email,
-          password: this.props.credentials.basic.password
-        }
-      }
+      username: this.props.input.username,
+      password: this.props.input.password
     };
   }
 
@@ -28,12 +25,7 @@ export default class RegisterMutation extends Relay.Mutation {
     return Relay.QL`
       fragment on _CreateUserPayload {
         changedUser {
-          credentials {
-            basic {
-              email,
-              password
-            }
-          },
+          username,
           createdAt,
           modifiedAt
         }
@@ -47,12 +39,7 @@ export default class RegisterMutation extends Relay.Mutation {
       children: [Relay.QL `
         fragment on _CreateUserPayload {
           changedUser {
-            credentials {
-              basic {
-                email,
-                password
-              }
-            },
+            username,
             createdAt,
             modifiedAt
           }
@@ -61,24 +48,19 @@ export default class RegisterMutation extends Relay.Mutation {
     }]
   }
 
-  getOptimisticResponse() {
-    return {
-      changedUser: {
-        credentials: this.props.credentials
-      }
-    }
-  }
+  // getOptimisticResponse() {
+  //   return {
+  //     changedUser: {
+  //       username: this.props.username
+  //     }
+  //   }
+  // }
 
   static fragments = {
     user: () => Relay.QL`
       fragment on _CreateUserPayload {
         changedUser {
-          credentials {
-            basic {
-              email,
-              password
-            }
-          },
+          username,
           createdAt,
           modifiedAt
         }

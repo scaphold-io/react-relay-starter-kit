@@ -5,7 +5,7 @@
  */
 
 var config = {
-	scapholdUrl: "https://api.scaphold.io/graphql/d8684aa2-cc15-42ec-99bb-a151faac61d5",
+	scapholdUrl: "https://api.scaphold.io/graphql/36e8d595-21ad-4dc1-86f0-ec74ce6ecfe2",
 }
 
 module.exports = config;

@@ -12,12 +12,15 @@ import Home from './components/Home/Home';
 import GraphiQLModule from './components/GraphiQL/GraphiQL';
 import { HomeQueries, prepareHomeParams } from './routes/HomeRoute';
 
+var options = {};
+if (localStorage.scapholdAuthToken) {
+  options.headers = {
+    Authorization: 'Bearer ' + localStorage.scapholdAuthToken
+  }
+}
+
 Relay.injectNetworkLayer(
-  new Relay.DefaultNetworkLayer(config.scapholdUrl, {
-    headers: {
-      Authorization: 'Bearer ' + localStorage.scapholdAuthToken
-    }
-  })
+  new Relay.DefaultNetworkLayer(config.scapholdUrl, options)
 );
 
 ReactDOM.render(
