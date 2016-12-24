@@ -12,7 +12,7 @@ import Home from './components/Home/Home';
 import GraphiQLModule from './components/GraphiQL/GraphiQL';
 import { HomeQueries, prepareHomeParams } from './routes/HomeRoute';
 
-var options = {};
+const options = {};
 if (localStorage.scapholdAuthToken) {
   options.headers = {
     Authorization: 'Bearer ' + localStorage.scapholdAuthToken

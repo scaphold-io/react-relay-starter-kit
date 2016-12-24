@@ -1,7 +1,7 @@
 import React from 'react';
 import Relay from 'react-relay';
 import { hashHistory } from 'react-router';
-import { Button, Modal, OverlayTrigger, NavItem, Form, FormControl, FormGroup, Row, Col, ControlLabel} from 'react-bootstrap';
+import { Button, Modal, OverlayTrigger, NavItem, Form, FormControl, FormGroup, Row, Col, ControlLabel, Alert } from 'react-bootstrap';
 import * as Auth from './../../auth/Auth';
 import config from './../../../config';
 
@@ -9,16 +9,19 @@ class Register extends React.Component {
 
   constructor(props) {
     super(props);
+
     this.state = {
       showModal: false,
-      registerEmail: undefined,
-      registerPassword: undefined,
-      errors: undefined
+      registerEmail: '',
+      registerPassword: '',
+      errors: null
     };
+
     this.close = this.close.bind(this);
     this.open = this.open.bind(this);
     this._handleRegisterEmailChange = this._handleRegisterEmailChange.bind(this);
     this._handleRegisterPasswordChange = this._handleRegisterPasswordChange.bind(this);
+    this.validateInput = this.validateInput.bind(this);
     this.registerUser = this.registerUser.bind(this);
   }
 
@@ -30,25 +33,44 @@ class Register extends React.Component {
     this.setState({ showModal: true });
   }
 
-  registerUser() {
-    Auth.register(this.state.registerEmail, this.state.registerPassword)
-      .then((result) => {
-        close();
-        localStorage.scapholdAuthToken = result.loginUser.token;
-        localStorage.userId = result.loginUser.id;
-        localStorage.email = this.state.registerEmail;
-        hashHistory.push(`/home`);
-      }).catch((error) => {
-        this.setState({errors: "Error: " + error});
-      });
-  }
-
   _handleRegisterEmailChange(e) {
-    this.state.registerEmail = e.target.value;
+    this.setState({
+      registerEmail: e.target.value
+    });
   }
 
   _handleRegisterPasswordChange(e) {
-    this.state.registerPassword = e.target.value;
+    this.setState({
+      registerPassword: e.target.value
+    })
+  }
+
+  validateInput() {
+    return (
+      this.state.registerEmail && this.state.registerEmail.length &&
+      this.state.registerPassword && this.state.registerPassword.length
+    );
+  }
+
+  registerUser() {
+    if (this.validateInput()) {
+      Auth.register(this.state.registerEmail, this.state.registerPassword).then(data => {
+        if (!data.errors) {
+          localStorage.setItem('scapholdAuthToken', data.loginUser.token);
+          localStorage.setItem('user', JSON.stringify(data.loginUser.user));
+          this.setState({ errors: [] });
+          hashHistory.push('/home');
+        } else {
+          this.setState({ errors: data.errors });
+        }
+      }).catch(errors => {
+        this.setState({ errors });
+      });
+    } else {
+      this.setState({
+        errors: 'Username or password was not filled out. Please fill out the required fields.'
+      });
+    }
   }
 
   render() {
@@ -61,9 +83,15 @@ class Register extends React.Component {
             <Modal.Title>Register Here!</Modal.Title>
           </Modal.Header>
           <Modal.Body>
+            <div style={styles.errors}>
+              {
+                this.state.errors ?
+                  <Alert bsStyle="danger">{this.state.errors}</Alert> : ''
+              }
+            </div>
             <Form horizontal>
               <Row>
-                <FormGroup controlId="formRegisterEmail">
+                <FormGroup>
                   <Col componentClass={ControlLabel} smOffset={1} sm={2}>
                     Email
                   </Col>
@@ -72,7 +100,7 @@ class Register extends React.Component {
                   </Col>
                 </FormGroup>
 
-                <FormGroup controlId="formRegisterPassword">
+                <FormGroup>
                   <Col componentClass={ControlLabel} smOffset={1} sm={2}>
                     Password
                   </Col>
@@ -82,7 +110,6 @@ class Register extends React.Component {
                 </FormGroup>
               </Row>
             </Form>
-            <div style={styles.errors}>{this.state.errors}</div>
           </Modal.Body>
           <Modal.Footer>
             <Button bsStyle="primary" type="submit" onClick={this.registerUser}>Register</Button>
@@ -94,14 +121,13 @@ class Register extends React.Component {
   }
 }
 
-export default Relay.createContainer(Register, {
-  fragments: {
-  }
-});
-
 const styles = {
   errors: {
-    textAlign: 'center',
+    textAlign: 'left',
     color: 'red'
   }
 };
+
+export default Relay.createContainer(Register, {
+  fragments: {}
+});

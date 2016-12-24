@@ -22,9 +22,12 @@ export default class LoginMutation extends Relay.Mutation {
 
   getFatQuery() {
     return Relay.QL`
-      fragment on _LoginUserPayload {
-        id,
+      fragment on LoginUserPayload {
         token
+        user {
+          id
+          username
+        }
       }
     `
   }
@@ -33,9 +36,12 @@ export default class LoginMutation extends Relay.Mutation {
     return [{
       type: 'REQUIRED_CHILDREN',
       children: [Relay.QL `
-        fragment on _LoginUserPayload {
-          id,
+        fragment on LoginUserPayload {
           token
+          user {
+            id
+            username
+          }
         }
       `]
     }]
@@ -49,9 +55,12 @@ export default class LoginMutation extends Relay.Mutation {
 
   static fragments = {
     user: () => Relay.QL`
-      fragment on _LoginUserPayload {
-          id,
+      fragment on LoginUserPayload {
           token
+          user {
+            id
+            username
+          }
         }
     `,
   };

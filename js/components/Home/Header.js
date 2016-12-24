@@ -20,7 +20,8 @@ class Header extends React.Component {
   }
 
   render() {
-    var loggedInUser = localStorage.email;
+    const user = JSON.parse(localStorage.getItem('user'));
+    const loggedInUser = user ? user.username : '';;
 
     return (
       <Navbar style={styles.navbar}>
@@ -41,8 +42,7 @@ class Header extends React.Component {
 }
 
 export default Relay.createContainer(Header, {
-  fragments: {
-  }
+  fragments: {}
 });
 
 const styles = {

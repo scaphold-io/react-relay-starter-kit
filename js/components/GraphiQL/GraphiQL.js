@@ -9,9 +9,9 @@ import LoggedInHeader from './../Home/Header';
 function graphQLFetcher(graphQLParams) {
   return fetch(config.scapholdUrl, {
     method: 'post',
-    headers: { 
+    headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + localStorage.scapholdAuthToken
+      'Authorization': `Bearer ${localStorage.scapholdAuthToken}`
     },
     body: JSON.stringify(graphQLParams),
   }).then(response => response.json());
@@ -19,7 +19,7 @@ function graphQLFetcher(graphQLParams) {
 
 class GraphiQLModule extends React.Component {
   render() {
-    var header;
+    let header;
     if (!localStorage.scapholdAuthToken) {
       header = <Header />;
     }
@@ -37,8 +37,6 @@ class GraphiQLModule extends React.Component {
 }
 
 export default Relay.createContainer(GraphiQLModule, {
-  initialVariables: {
-  },
-  fragments: {
-  }
+  initialVariables: {},
+  fragments: {}
 });

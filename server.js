@@ -1,14 +1,13 @@
 import path from 'path';
 import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
-import {Schema} from './data/schema';
 import express from 'express';
 import config from './config';
 
 const APP_PORT = 3001;
 
 // Serve the Relay app
-var compiler = webpack({
+const compiler = webpack({
   entry: path.resolve(__dirname, 'js', 'app.js'),
   module: {
     loaders: [
@@ -22,7 +21,7 @@ var compiler = webpack({
   output: {filename: 'app.js', path: '/'}
 });
 
-var app = new WebpackDevServer(compiler, {
+const app = new WebpackDevServer(compiler, {
   contentBase: '/public/',
   publicPath: '/js/',
   proxy: { '/graphql': config.scapholdUrl },

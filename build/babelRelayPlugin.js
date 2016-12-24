@@ -9,6 +9,8 @@ var response = request('GET', config.scapholdUrl, {
   	}
 });
 
+// console.log(response.body.toString('utf-8')); // include this line for debugging
+
 var schema = JSON.parse(response.body.toString('utf-8'));
 
 module.exports = babelRelayPlugin(schema.data, {

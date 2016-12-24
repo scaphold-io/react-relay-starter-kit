@@ -12,11 +12,13 @@ class App extends React.Component {
     super(props);
   }
 
-  render() {
+  componentWillMount() {
     if (localStorage.scapholdAuthToken) {
       hashHistory.push('/home');
     }
+  }
 
+  render() {
     return (
       <div>
         <Header />
@@ -29,6 +31,5 @@ class App extends React.Component {
 }
 
 export default Relay.createContainer(App, {
-  fragments: {
-  }
+  fragments: {}
 });

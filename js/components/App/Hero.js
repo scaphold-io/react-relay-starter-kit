@@ -10,9 +10,16 @@ class Hero extends React.Component {
         <Col smOffset={2} sm={8}>
           <Jumbotron style={styles.jumbotron}>
             <h1>Welcome!</h1>
-            <p>Here you'll find Scaphold.io's Boilerplate React-Relay template :)</p>
-            <p><Button bsStyle="primary" bsSize="large" target="_blank" href="https://scaphold.io">Learn more <FontAwesome name="check" /></Button></p>
-            <p>Join our <a href="https://scapholdslackin.herokuapp.com/" target="_blank">Slack community</a>!</p>
+            <br />
+            <p>
+              Here you'll find <a href="https://scaphold.io" target="_blank" style={styles.scaphold}>Scaphold.io</a>'s Boilerplate React-Relay template
+              &nbsp;<FontAwesome name="smile-o" />
+            </p>
+            <br />
+            <p>
+              <Button bsStyle="primary" bsSize="large" target="_blank" href="https://scaphold.io">Learn more <FontAwesome name="check" /></Button>
+              <Button style={styles.slack} bsSize="large" target="_blank" href="https://scapholdslackin.herokuapp.com/">Join our Slack <FontAwesome name="slack" /></Button>
+            </p>
           </Jumbotron>
         </Col>
       </Row>
@@ -30,5 +37,12 @@ const styles = {
     marginTop: 20,
     borderRadius: 10,
     textAlign: 'center'
+  },
+  scaphold: {
+    color: '#1DAAA0'
+  },
+  slack: {
+    color: 'white',
+    backgroundColor: '#1DAAA0'
   }
 };

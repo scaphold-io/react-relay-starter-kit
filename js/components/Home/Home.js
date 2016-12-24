@@ -21,8 +21,6 @@ class Home extends React.Component {
 }
 
 export default Relay.createContainer(Home, {
-  initialVariables: {
-  },
-  fragments: {
-  }
+  initialVariables: {},
+  fragments: {}
 });
